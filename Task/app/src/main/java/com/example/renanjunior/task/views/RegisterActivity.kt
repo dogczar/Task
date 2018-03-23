@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import com.example.renanjunior.task.R
 import com.example.renanjunior.task.business.UserBusiness
-import com.example.renanjunior.task.repository.UserRepository
 import com.example.renanjunior.task.util.ValidationException
 import kotlinx.android.synthetic.main.activity_register.*
 

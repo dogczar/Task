@@ -19,6 +19,8 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
 
         mUserBusiness = UserBusiness(this)
 
+        isLogged()
+
         setListiners()
     }
 
@@ -34,16 +36,27 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
         }
     }
 
+    private fun isLogged(){
+        if (mUserBusiness.isLogged()){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+
     private fun handleLogin() {
         val email = editEmail.text.toString()
         val password = editPassword.text.toString()
 
         if(email != "" && password!="") {
             try {
-                mUserBusiness.login(email, password)
-                val intent : Intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                if(mUserBusiness.login(email, password)){
+                    val intent : Intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }else{
+                    Toast.makeText(this, getString(R.string.usuario_nao_cadastrado), Toast.LENGTH_LONG).show()
+                }
             }catch (e:Exception){
                 throw e
             }
